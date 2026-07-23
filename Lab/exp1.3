@@ -1,0 +1,34 @@
+import pandas as pd
+
+data = [
+    ['High','Good','Yes','Good','High','Yes'],
+    ['High','Excellent','Yes','Good','High','Yes'],
+    ['Medium','Average','No','Average','Medium','No'],
+    ['High','Good','Yes','Excellent','High','Yes'],
+    ['Low','Poor','No','Average','Low','No'],
+    ['High','Good','Yes','Good','Medium','Yes']
+]
+
+columns = ['CGPA','Communication','Internship','Programming','Aptitude','Placed']
+
+df = pd.DataFrame(data, columns=columns)
+
+print("Training Data")
+print(df)
+
+concepts = df.iloc[:, :-1].values
+target = df.iloc[:, -1].values
+
+hypothesis = None
+
+for i in range(len(target)):
+    if target[i] == "Yes":
+        if hypothesis is None:
+            hypothesis = concepts[i].copy()
+        else:
+            for j in range(len(hypothesis)):
+                if hypothesis[j] != concepts[i][j]:
+                    hypothesis[j] = '?'
+
+print("\nFinal Hypothesis:")
+print(hypothesis)
