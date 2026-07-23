@@ -1,0 +1,36 @@
+import pandas as pd
+
+# Training Dataset
+data = [
+    ['Sunny','Warm','Normal','Strong','Warm','Same','Yes'],
+    ['Sunny','Warm','High','Strong','Warm','Same','Yes'],
+    ['Rainy','Cold','High','Strong','Warm','Change','No'],
+    ['Sunny','Warm','High','Strong','Cool','Same','Yes'],
+    ['Rainy','Warm','Normal','Weak','Warm','Same','No'],
+    ['Sunny','Warm','Normal','Weak','Warm','Same','Yes']
+]
+
+columns = ['Sky','AirTemp','Humidity','Wind','Water','Forecast','PlayTennis']
+
+df = pd.DataFrame(data, columns=columns)
+
+print("Training Data")
+print(df)
+
+concepts = df.iloc[:, :-1].values
+target = df.iloc[:, -1].values
+
+# FIND-S Algorithm
+hypothesis = None
+
+for i in range(len(target)):
+    if target[i] == "Yes":
+        if hypothesis is None:
+            hypothesis = concepts[i].copy()
+        else:
+            for j in range(len(hypothesis)):
+                if hypothesis[j] != concepts[i][j]:
+                    hypothesis[j] = '?'
+
+print("\nFinal Hypothesis:")
+print(hypothesis)
