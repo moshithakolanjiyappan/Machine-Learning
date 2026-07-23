@@ -1,0 +1,57 @@
+import pandas as pd
+
+# Training Dataset
+data = [
+    ['Sunny','Warm','Normal','Strong','Warm','Same','Yes'],
+    ['Sunny','Warm','High','Strong','Warm','Same','Yes'],
+    ['Rainy','Cold','High','Strong','Warm','Change','No'],
+    ['Sunny','Warm','High','Strong','Cool','Same','Yes'],
+    ['Rainy','Warm','Normal','Weak','Warm','Same','No'],
+    ['Sunny','Warm','Normal','Weak','Warm','Same','Yes'],
+    ['Cloudy','Warm','Normal','Strong','Warm','Same','Yes'],
+    ['Sunny','Cold','High','Weak','Cool','Change','No']
+]
+
+columns = ['Sky','Temperature','Humidity','Wind','Water','Forecast','PlayTennis']
+
+df = pd.DataFrame(data, columns=columns)
+
+print("Training Data")
+print(df)
+
+concepts = df.iloc[:, :-1].values
+target = df.iloc[:, -1].values
+
+# Initialize Specific Hypothesis
+S = concepts[0].copy()
+
+# Initialize General Hypothesis
+G = [['?' for i in range(len(S))]]
+
+print("\nInitial Specific Hypothesis:")
+print(S)
+
+print("\nInitial General Hypothesis:")
+print(G)
+
+for i in range(len(concepts)):
+
+    if target[i] == "Yes":
+
+        for j in range(len(S)):
+            if S[j] != concepts[i][j]:
+                S[j] = '?'
+
+    else:
+
+        for j in range(len(S)):
+            if S[j] != '?':
+                if concepts[i][j] != S[j]:
+                    G.append(['?' if k != j else S[j] for k in range(len(S))])
+
+print("\nFinal Specific Hypothesis:")
+print(S)
+
+print("\nFinal General Hypothesis:")
+for g in G:
+    print(g)
