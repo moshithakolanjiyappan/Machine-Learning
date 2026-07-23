@@ -1,0 +1,35 @@
+import pandas as pd
+
+# Training Dataset
+data = [
+    ['High','Good','Permanent','Yes','Young','Yes'],
+    ['High','Good','Permanent','No','Middle','Yes'],
+    ['Low','Poor','Temporary','No','Young','No'],
+    ['Medium','Good','Permanent','Yes','Middle','Yes'],
+    ['High','Average','Temporary','Yes','Old','No'],
+    ['High','Good','Permanent','Yes','Middle','Yes']
+]
+
+columns = ['Income','CreditScore','Employment','Property','Age','LoanApproved']
+
+df = pd.DataFrame(data, columns=columns)
+
+print("Training Data")
+print(df)
+
+concepts = df.iloc[:, :-1].values
+target = df.iloc[:, -1].values
+
+hypothesis = None
+
+for i in range(len(target)):
+    if target[i] == "Yes":
+        if hypothesis is None:
+            hypothesis = concepts[i].copy()
+        else:
+            for j in range(len(hypothesis)):
+                if hypothesis[j] != concepts[i][j]:
+                    hypothesis[j] = '?'
+
+print("\nFinal Hypothesis:")
+print(hypothesis)
