@@ -1,0 +1,41 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
+
+# Create Dataset
+data = {
+    'CGPA': ['High','High','Medium','Medium','Low','High','Low','Medium','High','Low'],
+    'Communication': ['Good','Excellent','Good','Average','Poor','Good','Average','Good','Excellent','Poor'],
+    'Internship': ['Yes','Yes','Yes','No','No','No','No','Yes','Yes','Yes'],
+    'Programming': ['Good','Excellent','Good','Average','Poor','Good','Average','Excellent','Good','Average'],
+    'Placement': ['Yes','Yes','Yes','No','No','Yes','No','Yes','Yes','No']
+}
+
+df = pd.DataFrame(data)
+
+# Encode categorical values
+le = LabelEncoder()
+
+for column in df.columns:
+    df[column] = le.fit_transform(df[column])
+
+# Input and Output
+X = df.iloc[:, :-1].values
+y = df.iloc[:, -1].values
+
+# Create Decision Tree using ID3
+clf = DecisionTreeClassifier(criterion='entropy')
+
+# Train the model
+clf.fit(X, y)
+
+# New Sample
+# High, Good, Yes, Excellent
+sample = [[0, 2, 1, 1]]
+
+prediction = clf.predict(sample)
+
+if prediction[0] == 1:
+    print("Placement = Yes")
+else:
+    print("Placement = No")
