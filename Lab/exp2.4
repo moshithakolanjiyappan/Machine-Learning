@@ -1,0 +1,59 @@
+import pandas as pd
+
+# Training Dataset
+data = [
+    ['Yes','Yes','Yes','Yes','Yes','Positive'],
+    ['Yes','Yes','No','Yes','Yes','Positive'],
+    ['No','Yes','Yes','No','No','Negative'],
+    ['Yes','Yes','Yes','No','Yes','Positive'],
+    ['No','No','Yes','Yes','No','Negative'],
+    ['Yes','Yes','No','No','Yes','Positive'],
+    ['Yes','No','Yes','Yes','Yes','Positive'],
+    ['No','No','No','No','No','Negative']
+]
+
+columns = ['Fever','Cough','Headache','BodyPain','Fatigue','Disease']
+
+df = pd.DataFrame(data, columns=columns)
+
+print("Training Data")
+print(df)
+
+# Separate attributes and target
+concepts = df.iloc[:, :-1].values
+target = df.iloc[:, -1].values
+
+# Initialize Specific Hypothesis
+S = concepts[0].copy()
+
+# Initialize General Hypothesis
+G = [['?' for i in range(len(S))]]
+
+print("\nInitial Specific Hypothesis:")
+print(S)
+
+print("\nInitial General Hypothesis:")
+print(G)
+
+# Candidate Elimination Algorithm
+for i in range(len(concepts)):
+
+    if target[i] == "Positive":
+
+        for j in range(len(S)):
+            if S[j] != concepts[i][j]:
+                S[j] = '?'
+
+    else:
+
+        for j in range(len(S)):
+            if S[j] != '?':
+                if concepts[i][j] != S[j]:
+                    G.append(['?' if k != j else S[j] for k in range(len(S))])
+
+print("\nFinal Specific Hypothesis:")
+print(S)
+
+print("\nFinal General Hypothesis:")
+for g in G:
+    print(g)
