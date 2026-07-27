@@ -1,0 +1,44 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import DecisionTreeClassifier
+
+data = {
+'Outlook':['Sunny','Sunny','Overcast','Rain','Rain','Rain','Overcast','Sunny','Sunny','Rain','Sunny','Overcast','Overcast','Rain'],
+'Temperature':['Hot','Hot','Hot','Mild','Cool','Cool','Cool','Mild','Cool','Mild','Mild','Mild','Hot','Mild'],
+'Humidity':['High','High','High','High','Normal','Normal','Normal','High','Normal','Normal','Normal','High','Normal','High'],
+'Wind':['Weak','Strong','Weak','Weak','Weak','Strong','Strong','Weak','Weak','Weak','Strong','Strong','Weak','Strong'],
+'Play Tennis':['No','No','Yes','Yes','Yes','No','Yes','No','Yes','Yes','Yes','Yes','Yes','No']
+}
+
+df = pd.DataFrame(data)
+
+le = LabelEncoder()
+
+for column in df.columns:
+    df[column] = le.fit_transform(df[column])
+
+X = df.iloc[:,:-1]
+y = df.iloc[:,-1]
+
+clf = DecisionTreeClassifier(criterion="entropy")
+
+clf.fit(X,y)
+
+outlook = {'Overcast':0,'Rain':1,'Sunny':2}
+temperature = {'Cool':0,'Hot':1,'Mild':2}
+humidity = {'High':0,'Normal':1}
+wind = {'Strong':0,'Weak':1}
+
+sample = [[
+outlook['Sunny'],
+temperature['Cool'],
+humidity['High'],
+wind['Weak']
+]]
+
+prediction = clf.predict(sample)
+
+if prediction[0] == 1:
+    print("Play Tennis = Yes")
+else:
+    print("Play Tennis = No")
