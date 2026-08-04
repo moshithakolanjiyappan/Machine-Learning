@@ -1,0 +1,25 @@
+from sklearn.neighbors import KNeighborsClassifier
+
+X = [
+    [8,780,5],
+    [7,760,4],
+    [6,720,6],
+    [4,620,8],
+    [3,580,10],
+    [9,800,4],
+    [5,650,7],
+    [8,770,5],
+    [4,600,9],
+    [7,740,6]
+]
+
+y = ["Yes","Yes","Yes","No","No",
+     "Yes","No","Yes","No","Yes"]
+
+model = KNeighborsClassifier(n_neighbors=3)
+model.fit(X, y)
+
+new_sample = [[7,750,5]]
+prediction = model.predict(new_sample)
+
+print("Predicted Class:", prediction[0])
