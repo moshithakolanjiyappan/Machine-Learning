@@ -1,0 +1,42 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.neural_network import MLPClassifier
+
+data = {
+    "Fever":["Yes","Yes","No","Yes","No","Yes","No","Yes","Yes","No"],
+    "Cough":["Yes","Yes","Yes","No","No","Yes","Yes","No","Yes","No"],
+    "Headache":["Yes","No","Yes","Yes","No","Yes","No","No","Yes","Yes"],
+    "Body Pain":["Yes","Yes","No","Yes","No","No","Yes","Yes","Yes","No"],
+    "Fatigue":["Yes","Yes","No","Yes","No","Yes","No","Yes","Yes","No"],
+    "Disease":["Positive","Positive","Negative","Positive","Negative","Positive","Negative","Positive","Positive","Negative"]
+}
+
+df = pd.DataFrame(data)
+
+encoders = {}
+for col in df.columns:
+    le = LabelEncoder()
+    df[col] = le.fit_transform(df[col])
+    encoders[col] = le
+
+X = df.iloc[:, :-1]
+y = df.iloc[:, -1]
+
+model = MLPClassifier(hidden_layer_sizes=(5,), activation='relu',
+                      solver='adam', max_iter=1000, random_state=42)
+
+model.fit(X, y)
+
+new = pd.DataFrame({
+    "Fever":["Yes"],
+    "Cough":["Yes"],
+    "Headache":["No"],
+    "Body Pain":["Yes"],
+    "Fatigue":["Yes"]
+})
+
+for col in new.columns:
+    new[col] = encoders[col].transform(new[col])
+
+prediction = model.predict(new)
+print("Predicted Class:", encoders["Disease"].inverse_transform(prediction)[0])
