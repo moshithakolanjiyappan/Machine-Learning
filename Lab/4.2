@@ -1,0 +1,40 @@
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.neural_network import MLPClassifier
+
+data = {
+    "CGPA":[9,8,7,6,5,9,8,6,7,5],
+    "Communication":["Excellent","Good","Good","Average","Poor","Excellent","Good","Average","Excellent","Poor"],
+    "Internship":["Yes","Yes","Yes","No","No","Yes","No","Yes","Yes","No"],
+    "Programming":["Excellent","Good","Average","Average","Poor","Good","Good","Average","Good","Average"],
+    "Placement":["Placed","Placed","Placed","Not Placed","Not Placed","Placed","Placed","Not Placed","Placed","Not Placed"]
+}
+
+df = pd.DataFrame(data)
+
+encoders = {}
+for col in df.columns:
+    le = LabelEncoder()
+    df[col] = le.fit_transform(df[col])
+    encoders[col] = le
+
+X = df.iloc[:, :-1]
+y = df.iloc[:, -1]
+
+model = MLPClassifier(hidden_layer_sizes=(5,), activation='relu',
+                      solver='adam', max_iter=1000, random_state=42)
+
+model.fit(X, y)
+
+new = pd.DataFrame({
+    "CGPA":[8],
+    "Communication":["Excellent"],
+    "Internship":["Yes"],
+    "Programming":["Good"]
+})
+
+for col in new.columns:
+    new[col] = encoders[col].transform(new[col])
+
+prediction = model.predict(new)
+print("Predicted Class:", encoders["Placement"].inverse_transform(prediction)[0])
