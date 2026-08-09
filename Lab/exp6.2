@@ -2,12 +2,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
 
-
-# ============================================================
-# DATASET 1: STUDENT PLACEMENT PREDICTION
-# ============================================================
-
-X1 = [
+# Dataset
+X = [
     [9.1, 90, 88],
     [8.8, 85, 84],
     [8.2, 82, 80],
@@ -20,179 +16,46 @@ X1 = [
     [9.0, 89, 87]
 ]
 
-y1 = [
-    "Placed", "Placed", "Placed", "Not Placed", "Not Placed",
-    "Placed", "Not Placed", "Placed", "Not Placed", "Placed"
+# Target variable
+y = [
+    "Placed",
+    "Placed",
+    "Placed",
+    "Not Placed",
+    "Not Placed",
+    "Placed",
+    "Not Placed",
+    "Placed",
+    "Not Placed",
+    "Placed"
 ]
 
+# Split dataset into training and testing data
 X_train, X_test, y_train, y_test = train_test_split(
-    X1, y1, test_size=0.3, random_state=42
+    X, y, test_size=0.3, random_state=42
 )
 
+# Create Naive Bayes model
 model = GaussianNB()
+
+# Train the model
 model.fit(X_train, y_train)
 
+# Predict test data
 y_pred = model.predict(X_test)
 
-print("\n===== DATASET 1: STUDENT PLACEMENT =====")
-print("Actual:", y_test)
-print("Predicted:", y_pred)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("Accuracy:", accuracy_score(y_test, y_pred))
+# Confusion matrix
+cm = confusion_matrix(y_test, y_pred)
 
+# Accuracy
+accuracy = accuracy_score(y_test, y_pred)
 
-# ============================================================
-# DATASET 2: LOAN APPROVAL PREDICTION
-# ============================================================
+# Display results
+print("Actual Values:", y_test)
+print("Predicted Values:", y_pred)
 
-X2 = [
-    [8, 780, 5],
-    [7, 760, 4],
-    [6, 730, 5],
-    [4, 620, 8],
-    [3, 590, 9],
-    [9, 810, 4],
-    [5, 650, 7],
-    [8, 770, 5],
-    [4, 610, 8],
-    [7, 750, 6]
-]
+print("\nConfusion Matrix:")
+print(cm)
 
-y2 = [
-    "Yes", "Yes", "Yes", "No", "No",
-    "Yes", "No", "Yes", "No", "Yes"
-]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X2, y2, test_size=0.3, random_state=42
-)
-
-model = GaussianNB()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-
-print("\n===== DATASET 2: LOAN APPROVAL =====")
-print("Actual:", y_test)
-print("Predicted:", y_pred)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("Accuracy:", accuracy_score(y_test, y_pred))
-
-
-# ============================================================
-# DATASET 3: DISEASE DIAGNOSIS
-# ============================================================
-
-X3 = [
-    [39.1, 112, 94],
-    [38.8, 109, 95],
-    [37.0, 78, 99],
-    [39.3, 115, 93],
-    [36.8, 74, 98],
-    [38.7, 110, 94],
-    [37.1, 80, 98],
-    [39.0, 113, 92],
-    [36.9, 76, 99],
-    [38.9, 111, 93]
-]
-
-y3 = [
-    "Positive", "Positive", "Negative", "Positive", "Negative",
-    "Positive", "Negative", "Positive", "Negative", "Positive"
-]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X3, y3, test_size=0.3, random_state=42
-)
-
-model = GaussianNB()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-
-print("\n===== DATASET 3: DISEASE DIAGNOSIS =====")
-print("Actual:", y_test)
-print("Predicted:", y_pred)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("Accuracy:", accuracy_score(y_test, y_pred))
-
-
-# ============================================================
-# DATASET 4: EMPLOYEE PROMOTION PREDICTION
-# ============================================================
-
-X4 = [
-    [10, 95, 50],
-    [9, 92, 48],
-    [8, 90, 45],
-    [4, 70, 25],
-    [3, 65, 20],
-    [11, 96, 52],
-    [5, 75, 30],
-    [8, 89, 44],
-    [2, 60, 18],
-    [7, 87, 40]
-]
-
-y4 = [
-    "Yes", "Yes", "Yes", "No", "No",
-    "Yes", "No", "Yes", "No", "Yes"
-]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X4, y4, test_size=0.3, random_state=42
-)
-
-model = GaussianNB()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-
-print("\n===== DATASET 4: EMPLOYEE PROMOTION =====")
-print("Actual:", y_test)
-print("Predicted:", y_pred)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("Accuracy:", accuracy_score(y_test, y_pred))
-
-
-# ============================================================
-# DATASET 5: FRUIT CLASSIFICATION
-# ============================================================
-
-X5 = [
-    [150, 7.5, 90],
-    [160, 7.8, 88],
-    [145, 7.3, 91],
-    [120, 5.5, 70],
-    [125, 5.8, 72],
-    [130, 6.0, 74],
-    [155, 7.6, 89],
-    [118, 5.4, 69],
-    [148, 7.4, 92],
-    [122, 5.7, 71]
-]
-
-y5 = [
-    "Apple", "Apple", "Apple", "Orange", "Orange",
-    "Orange", "Apple", "Orange", "Apple", "Orange"
-]
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X5, y5, test_size=0.3, random_state=42
-)
-
-model = GaussianNB()
-model.fit(X_train, y_train)
-
-y_pred = model.predict(X_test)
-
-print("\n===== DATASET 5: FRUIT CLASSIFICATION =====")
-print("Actual:", y_test)
-print("Predicted:", y_pred)
-print("Confusion Matrix:")
-print(confusion_matrix(y_test, y_pred))
-print("Accuracy:", accuracy_score(y_test, y_pred))
+print("\nAccuracy:", accuracy)
+print("Accuracy Percentage:", accuracy * 100, "%")
