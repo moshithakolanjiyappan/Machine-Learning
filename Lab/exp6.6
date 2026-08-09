@@ -1,0 +1,38 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [150, 7.5, 90],
+    [160, 7.8, 88],
+    [145, 7.3, 91],
+    [120, 5.5, 70],
+    [125, 5.8, 72],
+    [130, 6.0, 74],
+    [155, 7.6, 89],
+    [118, 5.4, 69],
+    [148, 7.4, 92],
+    [122, 5.7, 71]
+]
+
+# Target: 1 = Apple, 0 = Orange
+y = [1, 1, 1, 0, 0, 0, 1, 0, 1, 0]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Train model
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# Predict
+y_pred = model.predict(X_test)
+
+# Results
+print("Fruit Classification")
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
