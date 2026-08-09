@@ -1,0 +1,41 @@
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [9.2, 90, 88],
+    [8.8, 85, 84],
+    [8.5, 82, 80],
+    [7.2, 72, 70],
+    [6.8, 68, 65],
+    [9.0, 91, 89],
+    [7.0, 70, 68],
+    [8.7, 86, 83],
+    [6.5, 65, 60],
+    [9.1, 92, 90]
+]
+
+# Target: 1 = Placed, 0 = Not Placed
+y = [1, 1, 1, 0, 0, 1, 0, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Create and train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# New sample
+new_sample = [[8.9, 88, 85]]
+
+# Prediction
+prediction = model.predict(new_sample)
+
+# Display result
+print("Student Placement Prediction")
+print("Predicted Class:", prediction[0])
+
+if prediction[0] == 1:
+    print("
