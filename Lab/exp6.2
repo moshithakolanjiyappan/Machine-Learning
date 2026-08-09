@@ -2,7 +2,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix, accuracy_score
 from sklearn.model_selection import train_test_split
 
-# Dataset
+# Input data
 X = [
     [9.1, 90, 88],
     [8.8, 85, 84],
@@ -16,46 +16,23 @@ X = [
     [9.0, 89, 87]
 ]
 
-# Target variable
-y = [
-    "Placed",
-    "Placed",
-    "Placed",
-    "Not Placed",
-    "Not Placed",
-    "Placed",
-    "Not Placed",
-    "Placed",
-    "Not Placed",
-    "Placed"
-]
+# Target: 1 = Placed, 0 = Not Placed
+y = [1, 1, 1, 0, 0, 1, 0, 1, 0, 1]
 
-# Split dataset into training and testing data
+# Split data
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=42
 )
 
-# Create Naive Bayes model
+# Train model
 model = GaussianNB()
-
-# Train the model
 model.fit(X_train, y_train)
 
-# Predict test data
+# Predict
 y_pred = model.predict(X_test)
 
-# Confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-
-# Accuracy
-accuracy = accuracy_score(y_test, y_pred)
-
-# Display results
-print("Actual Values:", y_test)
-print("Predicted Values:", y_pred)
-
-print("\nConfusion Matrix:")
-print(cm)
-
-print("\nAccuracy:", accuracy)
-print("Accuracy Percentage:", accuracy * 100, "%")
+# Results
+print("Student Placement Prediction")
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
