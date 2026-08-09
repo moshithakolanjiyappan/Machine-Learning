@@ -1,0 +1,38 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [8, 780, 5],
+    [7, 760, 4],
+    [6, 730, 5],
+    [4, 620, 8],
+    [3, 590, 9],
+    [9, 810, 4],
+    [5, 650, 7],
+    [8, 770, 5],
+    [4, 610, 8],
+    [7, 750, 6]
+]
+
+# Target: 1 = Yes, 0 = No
+y = [1, 1, 1, 0, 0, 1, 0, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Train model
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# Predict
+y_pred = model.predict(X_test)
+
+# Results
+print("Loan Approval Prediction")
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
