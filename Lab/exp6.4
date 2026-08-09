@@ -1,0 +1,39 @@
+
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [39.1, 112, 94],
+    [38.8, 109, 95],
+    [37.0, 78, 99],
+    [39.3, 115, 93],
+    [36.8, 74, 98],
+    [38.7, 110, 94],
+    [37.1, 80, 98],
+    [39.0, 113, 92],
+    [36.9, 76, 99],
+    [38.9, 111, 93]
+]
+
+# Target: 1 = Positive, 0 = Negative
+y = [1, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Train model
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# Predict
+y_pred = model.predict(X_test)
+
+# Results
+print("Disease Diagnosis")
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
