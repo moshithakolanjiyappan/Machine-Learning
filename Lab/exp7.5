@@ -1,0 +1,43 @@
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [10, 95, 50],
+    [9, 92, 48],
+    [8, 90, 45],
+    [4, 70, 25],
+    [3, 65, 20],
+    [11, 96, 52],
+    [5, 75, 30],
+    [8, 89, 44],
+    [2, 60, 18],
+    [7, 87, 40]
+]
+
+# Target: 1 = Promoted, 0 = Not Promoted
+y = [1, 1, 1, 0, 0, 1, 0, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Create and train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# New sample
+new_sample = [[8, 91, 46]]
+
+# Prediction
+prediction = model.predict(new_sample)
+
+# Display result
+print("Employee Promotion Prediction")
+print("Predicted Class:", prediction[0])
+
+if prediction[0] == 1:
+    print("Employee will be Promoted")
+else:
+    print("Employee will Not be Promoted")
