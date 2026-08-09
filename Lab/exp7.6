@@ -1,0 +1,43 @@
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [22, 3, 30],
+    [25, 4, 35],
+    [28, 5, 45],
+    [32, 7, 60],
+    [35, 8, 65],
+    [40, 9, 75],
+    [45, 10, 80],
+    [30, 6, 55],
+    [24, 4, 40],
+    [38, 9, 70]
+]
+
+# Target: 1 = Purchased, 0 = Not Purchased
+y = [0, 0, 0, 1, 1, 1, 1, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Create and train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# New sample
+new_sample = [[34, 8, 68]]
+
+# Prediction
+prediction = model.predict(new_sample)
+
+# Display result
+print("Customer Purchase Prediction")
+print("Predicted Class:", prediction[0])
+
+if prediction[0] == 1:
+    print("Customer will Purchase")
+else:
+    print("Customer will Not Purchase")
