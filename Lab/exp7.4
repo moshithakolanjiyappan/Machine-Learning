@@ -1,0 +1,43 @@
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [39.1, 112, 94],
+    [38.8, 109, 95],
+    [37.0, 78, 99],
+    [39.3, 115, 93],
+    [36.8, 74, 98],
+    [38.7, 110, 94],
+    [37.1, 80, 98],
+    [39.0, 113, 92],
+    [36.9, 76, 99],
+    [38.9, 111, 93]
+]
+
+# Target: 1 = Disease Present, 0 = Disease Absent
+y = [1, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Create and train model
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# New sample
+new_sample = [[38.8, 110, 94]]
+
+# Prediction
+prediction = model.predict(new_sample)
+
+# Display result
+print("Disease Diagnosis")
+print("Predicted Class:", prediction[0])
+
+if prediction[0] == 1:
+    print("Disease Present")
+else:
+    print("Disease Absent")
