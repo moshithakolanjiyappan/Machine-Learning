@@ -1,0 +1,38 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
+
+# Input data
+X = [
+    [10, 95, 50],
+    [9, 92, 48],
+    [8, 90, 45],
+    [4, 70, 25],
+    [3, 65, 20],
+    [11, 96, 52],
+    [5, 75, 30],
+    [8, 89, 44],
+    [2, 60, 18],
+    [7, 87, 40]
+]
+
+# Target: 1 = Yes, 0 = No
+y = [1, 1, 1, 0, 0, 1, 0, 1, 0, 1]
+
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+# Train model
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+# Predict
+y_pred = model.predict(X_test)
+
+# Results
+print("Employee Promotion Prediction")
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
+print("Accuracy:", accuracy_score(y_test, y_pred))
