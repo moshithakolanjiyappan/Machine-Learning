@@ -1,0 +1,30 @@
+from sklearn.linear_model import LinearRegression
+
+# Dataset
+X = [
+    [1, 12000, 1200],
+    [2, 18000, 1200],
+    [3, 25000, 1300],
+    [4, 35000, 1400],
+    [5, 45000, 1500],
+    [6, 55000, 1500],
+    [7, 65000, 1600],
+    [8, 75000, 1600],
+    [9, 85000, 1800],
+    [10, 95000, 1800]
+]
+
+# Target: Car Price in ₹ Lakhs
+y = [8.5, 8.0, 7.4, 6.8, 6.1, 5.5, 5.0, 4.5, 4.0, 3.5]
+
+# Create and train model
+model = LinearRegression()
+model.fit(X, y)
+
+# New sample
+new_sample = [[4, 38000, 1400]]
+
+# Prediction
+prediction = model.predict(new_sample)
+
+print("Predicted Car Price:", prediction[0], "Lakhs")
