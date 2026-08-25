@@ -1,0 +1,27 @@
+from sklearn.linear_model import LinearRegression
+
+# Features: Manufacturing Year, Mileage, Fuel Efficiency
+X = [
+    [2024, 10000, 22],
+    [2023, 18000, 21],
+    [2022, 25000, 20],
+    [2021, 35000, 19],
+    [2020, 45000, 18],
+    [2019, 55000, 17],
+    [2018, 65000, 16],
+    [2017, 75000, 15],
+    [2016, 85000, 14],
+    [2015, 95000, 13]
+]
+
+# Price in Lakhs
+y = [10.5, 9.8, 9.0, 8.2, 7.5, 6.8, 6.0, 5.4, 4.8, 4.2]
+
+model = LinearRegression()
+model.fit(X, y)
+
+new_sample = [[2021, 32000, 19]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Car Price:", prediction[0], "Lakhs")
