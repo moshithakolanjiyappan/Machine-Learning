@@ -1,27 +1,24 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
 
 X = [
-    [39.1, 112, 94],
-    [38.8, 109, 95],
-    [37.0, 78, 99],
-    [39.3, 115, 93],
-    [36.8, 74, 98],
-    [38.7, 110, 94],
-    [37.1, 80, 98],
-    [39.0, 113, 92],
-    [36.9, 76, 99],
-    [38.9, 111, 93]
+    [1, 15, 60],
+    [2, 15, 65],
+    [3, 16, 70],
+    [4, 16, 75],
+    [5, 17, 80],
+    [6, 17, 82],
+    [7, 18, 85],
+    [8, 18, 88],
+    [9, 18, 90],
+    [10, 19, 94]
 ]
 
-y = [1, 1, 0, 1, 0, 1, 0, 1, 0, 1]
+y = [3.5, 4.2, 5.1, 6.0, 7.2, 8.0, 9.1, 10.0, 11.2, 12.5]
 
-model = LogisticRegression()
+model = LinearRegression()
 model.fit(X, y)
 
-new_sample = [[38.8, 110, 94]]
+new_sample = [[7, 18, 86]]
 prediction = model.predict(new_sample)
 
-if prediction[0] == 1:
-    print("Predicted Result: Disease Present")
-else:
-    print("Predicted Result: Disease Absent")
+print("Predicted Salary:", prediction[0], "Lakhs")
