@@ -1,27 +1,24 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
 
 X = [
-    [22, 3, 30],
-    [25, 4, 35],
-    [28, 5, 45],
-    [32, 7, 60],
-    [35, 8, 65],
-    [40, 9, 75],
-    [45, 10, 80],
-    [30, 6, 55],
-    [24, 4, 40],
-    [38, 9, 70]
+    [10, 2, 120],
+    [15, 3, 150],
+    [20, 4, 180],
+    [25, 5, 210],
+    [30, 6, 240],
+    [35, 7, 260],
+    [40, 8, 280],
+    [45, 9, 300],
+    [50, 10, 320],
+    [55, 11, 340]
 ]
 
-y = [0, 0, 0, 1, 1, 1, 1, 1, 0, 1]
+y = [3.5, 4.5, 5.8, 7.0, 8.2, 9.5, 10.8, 12.0, 13.5, 15.0]
 
-model = LogisticRegression()
+model = LinearRegression()
 model.fit(X, y)
 
-new_sample = [[34, 8, 68]]
+new_sample = [[38, 7, 270]]
 prediction = model.predict(new_sample)
 
-if prediction[0] == 1:
-    print("Predicted Result: Purchased")
-else:
-    print("Predicted Result: Not Purchased")
+print("Predicted Monthly Sales:", prediction[0], "Lakhs")
