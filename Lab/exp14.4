@@ -1,0 +1,30 @@
+from sklearn.linear_model import LinearRegression
+
+# Features: House Area, Floors, Garden Area
+X = [
+    [1000, 1, 100],
+    [1200, 1, 120],
+    [1400, 2, 150],
+    [1600, 2, 180],
+    [1800, 2, 200],
+    [2000, 3, 240],
+    [2200, 3, 280],
+    [2400, 3, 320],
+    [2600, 4, 350],
+    [2800, 4, 400]
+]
+
+# House Price in Lakhs
+y = [45, 55, 68, 82, 96, 112, 130, 150, 172, 196]
+
+# Create and train model
+model = LinearRegression()
+model.fit(X, y)
+
+# New sample
+new_sample = [[2100, 3, 250]]
+
+# Prediction
+prediction = model.predict(new_sample)
+
+print("Predicted House Price:", prediction[0], "Lakhs")
