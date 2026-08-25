@@ -1,0 +1,32 @@
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+
+X = [
+    [9.2, 90, 88],
+    [8.8, 85, 82],
+    [8.5, 80, 79],
+    [7.2, 72, 70],
+    [6.8, 68, 65],
+    [9.0, 92, 90],
+    [7.5, 75, 74],
+    [8.6, 84, 81],
+    [6.5, 60, 58],
+    [8.9, 88, 86]
+]
+
+y = [
+    "Placed", "Placed", "Placed", "Not Placed", "Not Placed",
+    "Placed", "Not Placed", "Placed", "Not Placed", "Placed"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+new_sample = [[8.7, 86, 84]]
+prediction = knn.predict(new_sample)
+
+print("Predicted Placement:", prediction[0])
