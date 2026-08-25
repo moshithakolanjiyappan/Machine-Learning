@@ -1,0 +1,27 @@
+from sklearn.linear_model import LogisticRegression
+
+X = [
+    [22, 3, 30],
+    [25, 4, 35],
+    [28, 5, 45],
+    [32, 7, 60],
+    [35, 8, 65],
+    [40, 9, 75],
+    [45, 10, 80],
+    [30, 6, 55],
+    [24, 4, 40],
+    [38, 9, 70]
+]
+
+y = [0, 0, 0, 1, 1, 1, 1, 1, 0, 1]
+
+model = LogisticRegression()
+model.fit(X, y)
+
+new_sample = [[34, 8, 68]]
+prediction = model.predict(new_sample)
+
+if prediction[0] == 1:
+    print("Predicted Result: Purchased")
+else:
+    print("Predicted Result: Not Purchased")
