@@ -1,0 +1,27 @@
+from sklearn.linear_model import LinearRegression
+
+# Features: Engine Capacity, Horsepower, Mileage
+X = [
+    [1000, 70, 10000],
+    [1200, 82, 15000],
+    [1400, 95, 22000],
+    [1500, 105, 30000],
+    [1600, 115, 38000],
+    [1800, 130, 45000],
+    [2000, 145, 52000],
+    [2200, 160, 60000],
+    [2400, 175, 68000],
+    [2600, 190, 76000]
+]
+
+# Price in Lakhs
+y = [6.5, 7.4, 8.8, 9.8, 10.5, 11.8, 13.2, 14.5, 15.8, 17.2]
+
+model = LinearRegression()
+model.fit(X, y)
+
+new_sample = [[1700, 120, 42000]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Car Price:", prediction[0], "Lakhs")
