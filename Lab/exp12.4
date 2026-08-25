@@ -1,0 +1,32 @@
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+
+X = [
+    [39.0, 110, 94],
+    [38.5, 108, 95],
+    [37.0, 78, 99],
+    [39.2, 115, 93],
+    [36.8, 75, 98],
+    [38.8, 112, 94],
+    [37.2, 80, 98],
+    [39.1, 114, 92],
+    [36.7, 74, 99],
+    [38.9, 111, 93]
+]
+
+y = [
+    "Positive", "Positive", "Negative", "Positive", "Negative",
+    "Positive", "Negative", "Positive", "Negative", "Positive"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+knn = KNeighborsClassifier(n_neighbors=3)
+knn.fit(X_train, y_train)
+
+new_sample = [[38.7, 109, 94]]
+prediction = knn.predict(new_sample)
+
+print("Predicted Disease:", prediction[0])
