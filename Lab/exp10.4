@@ -1,0 +1,28 @@
+from sklearn.mixture import GaussianMixture
+
+X = [
+    [800, 30],
+    [900, 35],
+    [1000, 40],
+    [1200, 50],
+    [1400, 60],
+    [1600, 75],
+    [1800, 90],
+    [2000, 105],
+    [2200, 120],
+    [2400, 135]
+]
+
+gmm = GaussianMixture(n_components=2, random_state=42)
+gmm.fit(X)
+
+clusters = gmm.predict(X)
+
+new_sample = [[1700, 82]]
+new_cluster = gmm.predict(new_sample)
+
+print("Cluster Labels:")
+print(clusters)
+
+print("New Sample Cluster:")
+print(new_cluster[0])
