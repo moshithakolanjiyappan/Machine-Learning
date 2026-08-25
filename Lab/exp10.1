@@ -1,0 +1,6 @@
+from sklearn.mixture import GaussianMixture
+import numpy as np
+X=np.array([[1],[2],[3],[10],[11],[12]])
+g=GaussianMixture(n_components=2)
+g.fit(X)
+print(g.predict(X))
