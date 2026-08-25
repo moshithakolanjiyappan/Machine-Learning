@@ -1,0 +1,6 @@
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+X,y=load_iris(return_X_y=True)
+m=KNeighborsClassifier()
+m.fit(X,y)
+print(m.predict([X[0]]))
