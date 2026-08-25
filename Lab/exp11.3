@@ -1,0 +1,31 @@
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import LabelEncoder
+
+X = [
+    [90000, 45, 5, 0],
+    [75000, 40, 6, 0],
+    [60000, 35, 8, 0],
+    [45000, 30, 10, 1],
+    [30000, 25, 12, 1],
+    [95000, 48, 4, 0],
+    [65000, 37, 7, 0],
+    [40000, 28, 9, 1],
+    [28000, 24, 13, 1],
+    [85000, 43, 5, 0]
+]
+
+y = [
+    "Excellent", "Good", "Good", "Average", "Poor",
+    "Excellent", "Good", "Average", "Poor", "Excellent"
+]
+
+encoder = LabelEncoder()
+y_encoded = encoder.fit_transform(y)
+
+model = DecisionTreeClassifier(criterion="entropy", random_state=42)
+model.fit(X, y_encoded)
+
+new_sample = [[70000, 38, 6, 0]]
+prediction = model.predict(new_sample)
+
+print("Predicted Credit Score:", encoder.inverse_transform(prediction)[0])
