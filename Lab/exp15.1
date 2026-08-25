@@ -1,0 +1,6 @@
+from sklearn.datasets import load_iris
+from sklearn.naive_bayes import GaussianNB
+X,y=load_iris(return_X_y=True)
+m=GaussianNB()
+m.fit(X,y)
+print(m.predict([X[0]]))
