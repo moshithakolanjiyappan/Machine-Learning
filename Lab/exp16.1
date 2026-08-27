@@ -1,0 +1,6 @@
+from sklearn.datasets import load_iris
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+X,y=load_iris(return_X_y=True)
+print("DT:",DecisionTreeClassifier().fit(X,y).score(X,y))
+print("KNN:",KNeighborsClassifier().fit(X,y).score(X,y))
