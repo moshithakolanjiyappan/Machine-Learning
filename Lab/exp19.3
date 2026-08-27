@@ -1,0 +1,33 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+
+X = [
+    [90000, 850, 8000],
+    [80000, 820, 9000],
+    [70000, 780, 12000],
+    [60000, 740, 15000],
+    [50000, 690, 18000],
+    [45000, 670, 20000],
+    [40000, 640, 23000],
+    [75000, 800, 10000],
+    [35000, 620, 25000],
+    [95000, 870, 7000]
+]
+
+y = [
+    "Approved", "Approved", "Approved", "Approved", "Rejected",
+    "Rejected", "Rejected", "Approved", "Rejected", "Approved"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+new_sample = [[72000, 790, 11000]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Loan Status:", prediction[0])
