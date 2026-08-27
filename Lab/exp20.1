@@ -1,0 +1,6 @@
+from sklearn.linear_model import LinearRegression
+X=[[1],[2],[3],[4]]
+y=[100,200,300,400]
+m=LinearRegression()
+m.fit(X,y)
+print(m.predict([[5]]))
