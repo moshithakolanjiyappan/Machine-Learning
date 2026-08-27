@@ -1,0 +1,33 @@
+from sklearn.linear_model import Perceptron
+from sklearn.model_selection import train_test_split
+
+X = [
+    [9.3, 92, 90],
+    [8.9, 87, 85],
+    [8.6, 84, 82],
+    [7.3, 74, 72],
+    [6.9, 69, 67],
+    [9.1, 91, 89],
+    [7.4, 75, 73],
+    [8.7, 85, 83],
+    [6.6, 64, 60],
+    [8.8, 88, 86]
+]
+
+y = [
+    "Placed", "Placed", "Placed", "Not Placed", "Not Placed",
+    "Placed", "Not Placed", "Placed", "Not Placed", "Placed"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = Perceptron(random_state=42)
+model.fit(X_train, y_train)
+
+new_sample = [[8.8, 86, 84]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Placement:", prediction[0])
