@@ -1,0 +1,37 @@
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+X = [
+    [8,780,5], [7,760,4], [6,730,5],
+    [4,620,8], [3,590,9], [9,810,4],
+    [5,650,7], [8,770,5], [4,610,8],
+    [7,750,6]
+]
+
+y = [
+    "Approved", "Approved", "Approved", "Rejected", "Rejected",
+    "Approved", "Rejected", "Approved", "Rejected", "Approved"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+dt = DecisionTreeClassifier(random_state=42)
+knn = KNeighborsClassifier(n_neighbors=3)
+
+dt.fit(X_train, y_train)
+knn.fit(X_train, y_train)
+
+dt_pred = dt.predict(X_test)
+knn_pred = knn.predict(X_test)
+
+print("Decision Tree Accuracy:", accuracy_score(y_test, dt_pred))
+print("KNN Accuracy:", accuracy_score(y_test, knn_pred))
+
+new_sample = [[7,760,5]]
+
+print("Decision Tree Prediction:", dt.predict(new_sample)[0])
+print("KNN Prediction:", knn.predict(new_sample)[0])
