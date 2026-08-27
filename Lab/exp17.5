@@ -1,0 +1,28 @@
+from sklearn.linear_model import LinearRegression
+
+X = [
+    [4,6,64],
+    [6,8,128],
+    [8,8,128],
+    [8,8,256],
+    [12,8,256],
+    [12,8,512],
+    [16,8,512],
+    [16,8,1024],
+    [18,8,1024],
+    [24,8,1024]
+]
+
+y = [
+    14000, 19000, 26000, 32000, 42000,
+    52000, 65000, 82000, 95000, 120000
+]
+
+model = LinearRegression()
+model.fit(X, y)
+
+new_sample = [[12,8,512]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Mobile Price: ₹", round(prediction[0], 2))
