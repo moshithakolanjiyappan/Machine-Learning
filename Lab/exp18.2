@@ -1,0 +1,33 @@
+from sklearn.linear_model import Perceptron
+from sklearn.model_selection import train_test_split
+
+X = [
+    [150, 7.5, 90],
+    [160, 7.8, 88],
+    [145, 7.3, 91],
+    [120, 5.5, 70],
+    [125, 5.8, 72],
+    [130, 6.0, 74],
+    [155, 7.6, 89],
+    [118, 5.4, 69],
+    [148, 7.4, 92],
+    [122, 5.7, 71]
+]
+
+y = [
+    "Apple", "Apple", "Apple", "Orange", "Orange",
+    "Orange", "Apple", "Orange", "Apple", "Orange"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = Perceptron(random_state=42)
+model.fit(X_train, y_train)
+
+new_sample = [[152, 7.5, 90]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Fruit:", prediction[0])
