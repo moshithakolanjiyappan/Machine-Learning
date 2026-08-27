@@ -1,0 +1,33 @@
+from sklearn.linear_model import Perceptron
+from sklearn.model_selection import train_test_split
+
+X = [
+    [39.2, 112, 93],
+    [38.8, 110, 94],
+    [37.0, 78, 99],
+    [39.1, 114, 92],
+    [36.8, 76, 98],
+    [38.9, 111, 94],
+    [37.2, 80, 99],
+    [39.3, 115, 92],
+    [36.7, 74, 98],
+    [38.7, 109, 95]
+]
+
+y = [
+    "Positive", "Positive", "Negative", "Positive", "Negative",
+    "Positive", "Negative", "Positive", "Negative", "Positive"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = Perceptron(random_state=42)
+model.fit(X_train, y_train)
+
+new_sample = [[38.9, 110, 94]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Disease:", prediction[0])
