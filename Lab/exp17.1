@@ -1,0 +1,6 @@
+from sklearn.linear_model import LinearRegression
+X=[[4],[6],[8],[10]]
+y=[10000,15000,20000,25000]
+m=LinearRegression()
+m.fit(X,y)
+print(m.predict([[12]]))
