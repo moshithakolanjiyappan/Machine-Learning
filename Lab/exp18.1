@@ -1,0 +1,7 @@
+from sklearn.datasets import load_iris
+from sklearn.linear_model import Perceptron
+
+X,y=load_iris(return_X_y=True)
+m=Perceptron()
+m.fit(X,y)
+print(m.predict([X[0]]))
