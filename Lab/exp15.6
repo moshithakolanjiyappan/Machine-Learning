@@ -1,0 +1,33 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+
+X = [
+    [100, 95, 70],
+    [125, 110, 65],
+    [150, 125, 55],
+    [800, 850, 22],
+    [1000, 950, 20],
+    [1200, 1050, 18],
+    [110, 100, 68],
+    [900, 900, 21],
+    [140, 120, 58],
+    [1300, 1100, 17]
+]
+
+y = [
+    "Bike", "Bike", "Bike", "Car", "Car",
+    "Car", "Bike", "Car", "Bike", "Car"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+new_sample = [[135, 118, 60]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Vehicle Type:", prediction[0])
