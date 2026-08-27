@@ -1,0 +1,34 @@
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+
+X = [
+    [10, 95, 50],
+    [8, 90, 45],
+    [7, 88, 40],
+    [3, 65, 20],
+    [2, 60, 18],
+    [9, 93, 48],
+    [4, 70, 25],
+    [8, 89, 42],
+    [2, 58, 15],
+    [6, 85, 38]
+]
+
+y = [
+    "Promoted", "Promoted", "Promoted", "Not Promoted",
+    "Not Promoted", "Promoted", "Not Promoted", "Promoted",
+    "Not Promoted", "Promoted"
+]
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42
+)
+
+model = GaussianNB()
+model.fit(X_train, y_train)
+
+new_sample = [[7, 90, 44]]
+
+prediction = model.predict(new_sample)
+
+print("Predicted Promotion:", prediction[0])
