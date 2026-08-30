@@ -18,16 +18,16 @@ X = [
 # Target: 1 = Placed, 0 = Not Placed
 y = [1, 1, 1, 0, 0, 1, 0, 1, 0, 1]
 
-# Split data
+# Split data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.3, random_state=42
 )
 
-# Create and train model
+# Create and train Logistic Regression model
 model = LogisticRegression()
 model.fit(X_train, y_train)
 
-# New sample
+# New student sample
 new_sample = [[8.9, 88, 85]]
 
 # Prediction
@@ -38,4 +38,6 @@ print("Student Placement Prediction")
 print("Predicted Class:", prediction[0])
 
 if prediction[0] == 1:
-    print("
+    print("Result: Student is likely to be Placed")
+else:
+    print("Result: Student is likely to be Not Placed")
